@@ -76,6 +76,3 @@ If you want to contribute to this project, please follow these guidelines:
 
 This project is licensed under the MIT License 
 
----
-
-Feel free to customize this README according to your project's specifics. You can add more detailed instructions, information about endpoints, or anything else that might be relevant.
