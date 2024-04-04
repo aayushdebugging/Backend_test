@@ -28,7 +28,7 @@ To get started with this project, follow these steps:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/job-portal-backend.git
+   git clone https://github.com/aayushdebugging/job-portal-backend.git
    ```
 
 2. **Install dependencies**:
