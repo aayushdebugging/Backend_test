@@ -1,6 +1,4 @@
-Certainly! Below is an example of a README file for a GitHub repository containing the backend code for a job portal website written in Node.js:
 
----
 
 # Job Portal Backend
 
