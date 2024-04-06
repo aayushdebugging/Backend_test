@@ -63,52 +63,66 @@ export const deleteJobController = async (req, res, next) => {
     await job.remove()
     res.status(200).json({ message: "Success,Job Deleted!" });
 };
+// export const jobStatsController = async (req, res, next) => {
+//     try {
+//         let userId;
 
+//         // Check if req.user.userId is a number representing a timestamp
+//         if (typeof req.user.userId === 'number') {
+//             userId = mongoose.Types.ObjectId.createFromTime(req.user.userId);
+//         } else {
+//             userId = mongoose.Types.ObjectId(req.user.userId);
+//         }
 
-export const jobStatsController = async (req, res, next) => {
-    const stats = await jobsModel.aggregate([
-        //search by user jobs
-        {
-            $match: {
-                createdBy: new mongoose.Types.ObjectId(req.user.userId),
-            },
+//         const stats = await jobsModel.aggregate([
+//             // Search by user jobs
+//             {
+//                 $match: {
+//                     createdBy: userId,
+//                 },
+//             },
+//             {
+//                 $group: {
+//                     _id: '$status',
+//                     count: { $sum: 1 }
+//                 },
+//             },
+//         ]);
 
-        },
-        {
-            $group: {
-                _id: '$status',
-                count: { $sum: 1 }
-            },
-        },
-    ]);
+//         // Default status
+//         const defaultStats = {
+//             pending: 0,
+//             reject: 0,
+//             interview: 0,
+//         };
 
-    //default status
-    const defaultStats = {
-        pending: stats.pending || 0,
-        reject: stats.reject||0,
-        interview:stats.interview ||0,
-    };
+//         // Populate default stats with actual values from stats array
+//         stats.forEach(stat => {
+//             defaultStats[stat._id] = stat.count;
+//         });
 
-    //monthly yearly stats
-    let monthlyApplication  = await jobsModel.aggregate([
-        {
-            $match:{
-                createdBy:new mongoose.Types.ObjectId (req.ues.userId)
-            },
-        },
-        {
-            $groups:{
-                _id:{
-                    year:{$year:'$createdAt'},
-                    month:{$month:'$createdAt'},
-                },
-                count:{
-                    $sum:1
-                },
-            }
+//         // Monthly application stats
+//         const monthlyApplication = await jobsModel.aggregate([
+//             {
+//                 $match: {
+//                     createdBy: userId
+//                 },
+//             },
+//             {
+//                 $group: {
+//                     _id: {
+//                         year: { $year: '$createdAt' },
+//                         month: { $month: '$createdAt' },
+//                     },
+//                     count: {
+//                         $sum: 1
+//                     },
+//                 },
+//             },
+//         ]);
 
-        }
-    ]); 
-
-    res.status(200).json({ totalJobs: stats.length, stats });
-};
+//         res.status(200).json({ totalJobs: stats.length, defaultStats, monthlyApplication });
+//     } catch (error) {
+//         next(error);
+//     }
+// };
