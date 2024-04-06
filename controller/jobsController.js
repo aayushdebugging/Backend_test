@@ -17,7 +17,7 @@ export const createJobController = async (req, res, next) => {
 
 
 export const getAlljobsController = async (req, res, next) => {
-    const {status} = req.query 
+    const {status , workType} = req.query 
     //conditions for searching filters
     const queryObject ={
         createdBy:req.user.userId
@@ -25,6 +25,9 @@ export const getAlljobsController = async (req, res, next) => {
     //logic filter 
     if (status && status !== 'all'){
         queryObject.status = status;
+    }
+    if (workType && workType !=='all'){
+        queryObject.workType = workType;
     }
     const queryResult = jobsModel.find(queryObject);
     const jobs = await queryResult;
