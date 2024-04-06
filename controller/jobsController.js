@@ -63,8 +63,9 @@ export const getAlljobsController = async (req, res, next) => {
     const jobs = await queryResult;
     //const jobs = await jobsModel.find({ createdBy: req.user.userId })
     res.status(200).json({
-        totalJobs: jobs.length,
+        totalJobs,
         jobs,
+        numOfPage,
     });
 };
 
