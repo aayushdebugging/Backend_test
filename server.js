@@ -8,6 +8,7 @@ import morgan from "morgan";
 //security packages
 import helmet from "helmet";
 import xss from "xss-clean";
+import sanitize from "express-mongo-sanitize";
 //files
 import connectDB from './config/db.js';
 
@@ -29,8 +30,9 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(helmet())
+app.use(helmet());
 app.use(xss());
+app.use(sanitize());
 app.use(express.json());
 app.use(cors())
 app.use(morgan("dev")) //time-taken ports
