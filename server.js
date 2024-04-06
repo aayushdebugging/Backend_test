@@ -9,6 +9,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import xss from "xss-clean";
 import sanitize from "express-mongo-sanitize";
+// import expresslimit from 'express-rate-limit';
 //files
 import connectDB from './config/db.js';
 
